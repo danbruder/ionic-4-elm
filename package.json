@@ -1,8 +1,7 @@
 {
   "name": "iconic-4-elm",
   "version": "1.0.0",
-  "description":
-    "An example of using Ionic 4 and Elm together to build cross platform apps.",
+  "description": "An example of using Ionic 4 and Elm together to build cross platform apps.",
   "main": "index.js",
   "directories": {
     "test": "tests"
@@ -19,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/danbruder/ionic-4-elm/issues"
   },
-  "homepage": "https://github.com/danbruder/ionic-4-elm#readme"
+  "homepage": "https://github.com/danbruder/ionic-4-elm#readme",
+  "dependencies": {
+    "create-elm-app": "^2.2.3"
+  }
 }
