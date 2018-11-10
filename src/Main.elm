@@ -1,65 +1,62 @@
-module Main exposing (Model, Msg(..), init, main, update, view)
+module Main exposing (Msg(..), main, update, view)
 
-import Html exposing (Html, div, h1, img, node, text)
-import Html.Events exposing (onClick)
-
-
-
----- MODEL ----
+import Browser
+import Html exposing (Html, button, div, node, text)
+import Html.Attributes exposing (attribute, style)
+import Html.Events exposing (on, onClick)
 
 
-type alias Model =
-    { counter : Int
-    }
-
-
-init : ( Model, Cmd Msg )
-init =
-    ( { counter = 0 }, Cmd.none )
-
-
-
----- UPDATE ----
+main =
+    Browser.sandbox { init = 0, update = update, view = view }
 
 
 type Msg
-    = NoOp
-    | Increment
+    = Increment
     | Decrement
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+type alias Model =
+    Int
+
+
 update msg model =
     case msg of
-        NoOp ->
-            model ! []
-
         Increment ->
-            { model | counter = model.counter + 1 } ! []
+            model + 1
 
         Decrement ->
-            { model | counter = model.counter - 1 } ! []
-
-
-
----- VIEW ----
+            model - 1
 
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ Html.p [] [ text "Elm is here!" ]
-        , node "ion-button" [ onClick Increment ] [ text "+" ]
-        , node "ion-button" [ onClick Decrement ] [ text "-" ]
-        , Html.p [] [ text <| "Count is " ++ toString model.counter ]
+    node "ion-app"
+        []
+        [ node "ion-header"
+            []
+            [ node "ion-toolbar"
+                []
+                [ node "ion-title" [] [ text "Elm and Ionic" ]
+                ]
+            ]
+        , node "ion-content"
+            [ style "height" "100vh" ]
+            [ node "ion-button" [ onClick Increment ] [ text "+" ]
+            , node "ion-button" [ onClick Decrement ] [ text "-" ]
+            , node "ion-item"
+                []
+                [ node "ion-label" [] [ text "Cool" ]
+                , node "ion-toggle" [] []
+                ]
+            , node "ion-item"
+                []
+                [ node "ion-label" [] [ text "Beans" ]
+                , node "ion-toggle" [] []
+                ]
+            , node "ion-item"
+                []
+                [ node "ion-label" [] [ text "Foo" ]
+                , node "ion-toggle" [] []
+                ]
+            ]
         ]
-
-
-main : Program Never Model Msg
-main =
-    Html.program
-        { view = view
-        , init = init
-        , update = update
-        , subscriptions = always Sub.none
-        }
